@@ -1,11 +1,8 @@
 import { useIsFocused } from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, ToastAndroid } from "react-native";
 import { InputWithLabel, Button } from "../../components";
-import {
-  getDataObject,
-  storeDataObject,
-} from "../../helpers/asyncStorageHelper";
+import { storeDataObject } from "../../helpers/asyncStorageHelper";
 import styles from "./Registration.styles";
 
 export default function Registration({ navigation }) {
@@ -22,6 +19,7 @@ export default function Registration({ navigation }) {
   const handleLoginTap = async () => {
     navigation.pop();
   };
+
   const handleInputOnChange = (value, from) => {
     if (from === "email") {
       setInputs({
@@ -47,6 +45,8 @@ export default function Registration({ navigation }) {
   };
   const handleRegistrationTap = async () => {
     await storeDataObject({ key: "userObj", value: inputs });
+    ToastAndroid.show("User Created", ToastAndroid.SHORT);
+    setInputs({ email: "", password: "", username: "", DOB: "" });
   };
   return (
     <View style={styles.container}>

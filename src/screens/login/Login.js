@@ -11,6 +11,7 @@ import {
   loaded,
   loading,
 } from "../../features/loadingSpinner/loadingSpinnerSlice";
+import { dashboardFlow } from "../../features/auth/authSlice";
 
 export default function Login({ navigation }) {
   const [inputs, setInputs] = useState({
@@ -57,7 +58,7 @@ export default function Login({ navigation }) {
     } else {
       await storeData({ key: "loggedin", value: "true" });
       dispatch(loaded());
-      navigation.navigate("DASHBOARD");
+      dispatch(dashboardFlow());
     }
   };
 

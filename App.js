@@ -48,7 +48,7 @@ export default function App() {
     <Provider store={store}>
       <ThemeContext.Provider value={{ theme }}>
         <NavigationContainer>
-          <AuthNavigator />
+          <Navigator />
         </NavigationContainer>
       </ThemeContext.Provider>
     </Provider>
