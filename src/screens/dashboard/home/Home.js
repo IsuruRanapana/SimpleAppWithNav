@@ -8,7 +8,7 @@ import {
   loaded,
   loading,
 } from "../../../features/loadingSpinner/loadingSpinnerSlice";
-import { useIsFocused } from "@react-navigation/native";
+import { NavigationContainer, useIsFocused } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { authFlow } from "../../../features/auth/authSlice";
 
@@ -22,6 +22,7 @@ export default function Home({ navigation }) {
   }, [isFocused]);
 
   const [user, setUser] = useState({});
+
   const getUser = async () => {
     dispatch(loading());
     const userDetails = await getDataObject({ key: "userObj" });
@@ -33,11 +34,16 @@ export default function Home({ navigation }) {
     await storeData({ key: "loggedin", value: "false" });
     dispatch(authFlow());
   };
+  const handleOpenDrawer = async () => {
+    navigation.openDrawer();
+  };
   return (
     <View style={styles.container}>
       <Spinner visible={loader} textContent={"Loading ..."} />
+
       <Text style={styles.text}>{`Hi ${user.username}`}</Text>
       <Button labelText={"Logout"} onPress={handleOnPress} />
+      <Button labelText={"Open Drawer"} onPress={handleOpenDrawer} />
     </View>
   );
 }
