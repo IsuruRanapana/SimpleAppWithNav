@@ -9,13 +9,33 @@ import {
   loading,
 } from "../../../features/loadingSpinner/loadingSpinnerSlice";
 import { NavigationContainer, useIsFocused } from "@react-navigation/native";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { authFlow } from "../../../features/auth/authSlice";
+import * as Font from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
 
 export default function Home({ navigation }) {
+  const [fontsLoaded] = Font.useFonts({
+    "Inter-Black": require("../../../../assets/fonts/Inter-BlackItalic.otf"),
+  });
   const loader = useSelector((state) => state.loader.value);
   const dispatch = useDispatch();
   const isFocused = useIsFocused();
+  // useEffect(() => {
+  //   async function prepare() {
+  //     await SplashScreen.preventAutoHideAsync();
+  //   }
+  //   prepare();
+  // }, []);
+
+  // const onLayoutRootView = useCallback(async () => {
+  //   if (fontsLoaded) {
+  //     await SplashScreen.hideAsync();
+  //   }
+  // }, [fontsLoaded]);
+  // if (!fontsLoaded) {
+  //   return null;
+  // }
 
   useEffect(() => {
     getUser();
@@ -42,6 +62,7 @@ export default function Home({ navigation }) {
       <Spinner visible={loader} textContent={"Loading ..."} />
 
       <Text style={styles.text}>{`Hi ${user.username}`}</Text>
+      <Text style={{ fontFamily: "Inter-Black" }}>{"You Are In"}</Text>
       <Button labelText={"Logout"} onPress={handleOnPress} />
       <Button labelText={"Open Drawer"} onPress={handleOpenDrawer} />
     </View>

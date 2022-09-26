@@ -5,12 +5,6 @@ import { Provider, useDispatch, useSelector } from "react-redux";
 import { store } from "./src/app/store";
 import { useColorScheme } from "react-native";
 import { ThemeContext } from "./src/contexts/themeContext";
-import {
-  loaded,
-  loading,
-} from "./src/features/loadingSpinner/loadingSpinnerSlice";
-import DashboardNavigator from "./src/routes/DashboardNavigator";
-import AuthNavigator from "./src/routes/AuthNavigator";
 
 const lightTheme = {
   background: "#F8F8F8",
